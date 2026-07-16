@@ -39,11 +39,11 @@ print(calc(2, 0, 'divide'))
 # Task 4
 def data_type_conversion(value, data_type='str'):# data type=float, str or int
     try:
-        if type == 'float':
+        if data_type == 'float':
             return float(value)
-        elif type == 'str':
+        elif data_type == 'str':
             return str(value)
-        elif type == 'int':
+        elif data_type == 'int':
             return int(value)
         else: 
             return f"You can't convert {value} into a {data_type}."
@@ -92,9 +92,9 @@ print(repeat("hi", 3))
 
 # Task 7-revise it
 def student_scores(choice, **kwargs):
-    if not kwargs:
-        return 0  
-    elif choice == 'best':
+    #if not kwargs:
+        #return 0  
+    if choice == 'best':
         return max(kwargs, key=kwargs.get)
     elif choice == 'mean':
         return sum(kwargs.values()) / len(kwargs)
@@ -141,7 +141,7 @@ def hangman(secret: str, guess: str) -> str:
             result.append(letter)
         else:
             result.append("_")
-    return "_".join(result)
+    return " ".join(result)
 print(hangman("alphabet", ["a", "p", "h", "b", "e"]))
 print(hangman("secret", ["s", "e", "c", "r", "t"]))
 
@@ -149,7 +149,7 @@ print(hangman("secret", ["s", "e", "c", "r", "t"]))
 def pig_latin(str): 
     #  If the string starts with a vowel 
     # (aeiou), "ay" is tacked onto the end.
-    vowels = "a,e,i,o,u"
+    vowels = "aeiou"
     words = str.split()
     # create a  empty list and assign it to 'result'
     result = [] #  transformed_words
@@ -173,5 +173,5 @@ def pig_latin(str):
     return " ".join(result)
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("quil")) # word start with 'qu' = ickquay
+print(pig_latin("quick")) # word start with 'qu' = ickquay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
