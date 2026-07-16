@@ -5,7 +5,7 @@ print(hello())
 
 # Task 2
 def greet(name):
-    return f"Hello {name}!"
+    return f"Hello, {name}!"
 print(greet('Zoe'))
 
 # Task 3
@@ -142,7 +142,7 @@ def hangman(secret: str, guess: str) -> str:
             result.append(letter)
         else:
             result.append("_")
-    return " ".join(result)
+    return "".join(result)
 print(hangman("alphabet", ["a", "p", "h", "b", "e"]))
 print(hangman("secret", ["s", "e", "c", "r", "t"]))
 
@@ -174,5 +174,6 @@ def pig_latin(str):
 
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("queen")) # word start with 'qu' = ickquay
+print(pig_latin("quiet")) # word start with 'qu' = ietquay
+print(pig_latin("square"))#sarequay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
