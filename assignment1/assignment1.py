@@ -5,7 +5,7 @@ print(hello())
 
 # Task 2
 def greet(name):
-    return ('Hello, ' + name + '!')
+    return f"Hello {name}!"
 print(greet('Zoe'))
 
 # Task 3
@@ -99,6 +99,7 @@ def student_scores(choice, **kwargs):
     elif choice == 'mean':
         return sum(kwargs.values()) / len(kwargs)
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75))
+print(student_scores("mean", Hanna=85, Zoe=95, Aria=75))
 
 # Task 8
 def titleize(str):
@@ -146,22 +147,21 @@ print(hangman("alphabet", ["a", "p", "h", "b", "e"]))
 print(hangman("secret", ["s", "e", "c", "r", "t"]))
 
 # Task 10
-def pig_latin(str): 
-    #  If the string starts with a vowel 
-    # (aeiou), "ay" is tacked onto the end.
-    vowels = "aeiou"
+def pig_latin(str):
     words = str.split()
-    # create a  empty list and assign it to 'result'
-    result = [] #  transformed_words
-    
+    result = []
+    vowels = "aeiou"
+
     for word in words:
         # check for "qu"
         if word.startswith("qu"):
-            result.append(word[2:] + "ay")
-        # check for vowel at the begining
+            result.append(word[2:] + "quay")
+        
+        # starts with a vowel
         elif word[0] in vowels:
             result.append(word + "ay")
-        # start with consonat
+            
+        # starts with a consonant
         else:
             consonant = ""
             for char in word:
@@ -171,7 +171,8 @@ def pig_latin(str):
                     break
             result.append(word[len(consonant):] + consonant + "ay")
     return " ".join(result)
+
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("quick")) # word start with 'qu' = ickquay
+print(pig_latin("queen")) # word start with 'qu' = ickquay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
