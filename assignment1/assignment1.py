@@ -1,6 +1,6 @@
 # Write your code here.
 def hello():
-    return 'hello!'
+    return 'Hello!'
 print(hello())
 
 # Task 2
@@ -19,7 +19,7 @@ def calc(val1, val2, defaultValue='multiply'):
             return val1 * val2
         elif defaultValue == 'divide':
             return val1 / val2
-        elif defaultValue == 'module':
+        elif defaultValue == 'modulo':
             return val1 % val2
         elif defaultValue == 'int_divide':
             return val1 // val2
@@ -28,16 +28,16 @@ def calc(val1, val2, defaultValue='multiply'):
         else:
             return 'Error: Unknown operation'
     except ZeroDivisionError:
-        return "Error: You can't divide by 0!"
+        return "You can't divide by 0!"
     except TypeError:
-        return "Error: You can't multiply those values!" 
+        return "You can't multiply those values!" 
 print(calc(2, 3, 'multiply'))
 print(calc(9, 3, 'divide'))
 print(calc('1', 'hi', 'multiply'))
 print(calc(2, 0, 'divide'))
 
 # Task 4
-def data_type_conversion(value, type='str'):# data type=float, str or int
+def data_type_conversion(value, data_type='str'):# data type=float, str or int
     try:
         if type == 'float':
             return float(value)
@@ -46,11 +46,11 @@ def data_type_conversion(value, type='str'):# data type=float, str or int
         elif type == 'int':
             return int(value)
         else: 
-            return f"You can't convert {value} into a {type}"
+            return f"You can't convert {value} into a {data_type}."
     except ValueError:
-        return f"You can't convert {value} into a {type}"
+        return f"You can't convert {value} into a {data_type}."
     except TypeError:
-        return f"You can't convert {value} into a {type}"
+        return f"You can't convert {value} into a {data_type}."
 print(data_type_conversion("5", "float"))#float
 print(data_type_conversion(91.1, "str"))#string
 print(data_type_conversion("110", "int"))#integer
@@ -74,7 +74,7 @@ def grade(*args):
         else:   
             return "F"
     except TypeError:
-        return  "Invalid data was provided."
+        return "Invalid data was provided."
 print(grade(85))
 print(grade(65))
 print(grade(75))
@@ -93,15 +93,15 @@ print(repeat("hi", 3))
 # Task 7-revise it
 def student_scores(choice, **kwargs):
     if not kwargs:
-        return None  
-    if choice == 'best':
+        return 0  
+    elif choice == 'best':
         return max(kwargs, key=kwargs.get)
     elif choice == 'mean':
-        return sum(kwargs.values() / len(kwargs))
-print(student_scores('best'))
+        return sum(kwargs.values()) / len(kwargs)
+print(student_scores("best", Hanna=85, Zoe=95, Aria=75))
 
 # Task 8
-def titleized(str):
+def titleize(str):
 
    # store the input string splitted in the 'words' variable 
     words = str.split()
@@ -128,46 +128,50 @@ def titleized(str):
 
     #return a new string         
     return " ".join(words)
-print(titleized("apple bee's"))
+print(titleize("apple bee's"))
 
 # Task 9
 def hangman(secret: str, guess: str) -> str: 
-    #The secret is some word that the caller doesn't know. So the caller 
-    # guesses various letters, which are the ones in the guess string.
-    secret = "alphabet"
+  
     # variable that will hold the new string
-    result = []
+    result = []# hint_part
      
     for letter in secret:
         if letter.lower() in guess:
             result.append(letter)
         else:
-            result.append("-")
-    return ' '.join(result)
-print(hangman(" ", "hit"))
+            result.append("_")
+    return "_".join(result)
+print(hangman("alphabet", ["a", "p", "h", "b", "e"]))
+print(hangman("secret", ["s", "e", "c", "r", "t"]))
 
 # Task 10
-def pig_latin(str):
+def pig_latin(str): 
     #  If the string starts with a vowel 
     # (aeiou), "ay" is tacked onto the end.
     vowels = "a,e,i,o,u"
-    # break a single string into a list of smaller substring and save that in 'words'
     words = str.split()
     # create a  empty list and assign it to 'result'
-    result = []
-
+    result = [] #  transformed_words
+    
     for word in words:
-        if word[0] in vowels:
+        # check for "qu"
+        if word.startswith("qu"):
+            result.append(word[2:] + "ay")
+        # check for vowel at the begining
+        elif word[0] in vowels:
             result.append(word + "ay")
+        # start with consonat
         else:
-            vowel_index = next((i for i, char in enumerate(word) if char in vowels), None)
-
-            if vowel_index is None:
-                result.append(word + "ay" )
-            else:
-                result.append(word[vowel_index:] + word[:vowel_index] + "ay")
-            return " ".join(result)
+            consonant = ""
+            for char in word:
+                if char not in vowels:
+                    consonant += char
+                else:
+                    break
+            result.append(word[len(consonant):] + consonant + "ay")
+    return " ".join(result)
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("quick")) # word start with a vowel "ay" is attach at the end- egg = eggay
+print(pig_latin("quil")) # word start with 'qu' = ickquay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
