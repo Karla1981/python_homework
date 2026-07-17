@@ -155,7 +155,7 @@ def pig_latin(word):
     
     # 1. Words starting with vowels
     if word[0].lower() in vowels:
-        return word + "way" 
+        return word + "ay" 
     # words starting with consonants
     else:
         index = 0
@@ -171,7 +171,7 @@ def pig_latin(word):
             index += 1   
         # put 'qu' to the end and add "ay"
         return word[index:] + word[:index] + "ay"   
-print(pig_latin("glove"))# word start with two consts word = oveglay
+print(pig_latin("python essentials"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
 print(pig_latin("square"))# square = sarequay
-print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
+print(pig_latin("intro to pyton"))# const is add at the end then 'ay' = ellowyay
