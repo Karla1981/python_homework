@@ -37,7 +37,7 @@ print(calc('1', 'hi', 'multiply'))
 print(calc(2, 0, 'divide'))
 
 # Task 4
-def data_type_conversion(value, data_type=""):# data type=float, str or int
+def data_type_conversion(value, data_type):# data type=float, str or int
     try:
         if data_type == 'float':
             return float(value)
@@ -92,20 +92,16 @@ print(repeat("hi", 3))
 
 # Task 7-revise it
 def student_scores(choice, **kwargs):
-    if not choice:
-        return "No choice"
-    
+  
     if choice == 'best':
         return max(kwargs, key=kwargs.get)
     elif choice == 'mean':
         total_score = sum(kwargs.values())
         number_of_scores = len(kwargs)
         return total_score / number_of_scores
-    else:
-        return "Error: Unknown command"
+
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
-print(student_scores(""))
 
 # Task 8
 def titleize(text):
@@ -152,31 +148,30 @@ def hangman(secret: str, guess: str) -> str:
 print(hangman("difficulty", "ic"))
 
 # Task 10
-def pig_latin(str):
-    words = str.split()
-    result = []
-    vowels = "aeiou"
-
-    for word in words:
-        # check for "qu"
-        if word.startswith("qu"):
-            result.append(word[2:] + "quay")
-        # starts with a vowel
-        elif word[0] in vowels:
-            result.append(word + "ay")      
-        # starts with a consonant
-        else:
-            consonant = ""
-            for char in word:
-                if char not in vowels:
-                    consonant += char
-                else:
-                    break
-            result.append(word[len(consonant):] + consonant + "ay")
-    return " ".join(result)
-
+def pig_latin(word):
+    #words = str.split()
+   # result = []
+    vowels = "aeiou" 
+    
+    # 1. Words starting with vowels
+    if word[0].lower() in vowels:
+        return word + "way" 
+    # words starting with consonants
+    else:
+        index = 0
+        while index < len(word):
+            char = word[index].lower()
+            # stop if we hit a normal vowel
+            if char in vowels:
+                break
+            # find "qu"
+            if char == 'q' and index + 1 < len(word) and word[index+1].lower() == 'u':
+                index += 2
+                break 
+            index += 1   
+        # put 'qu' to the end and add "ay"
+        return word[index:] + word[:index] + "ay"   
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("quiet")) # word start with 'qu' = ietquay
 print(pig_latin("square"))# square = sarequay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
