@@ -92,43 +92,46 @@ print(repeat("hi", 3))
 
 # Task 7-revise it
 def student_scores(choice, **kwargs):
-    #if not kwargs:
-        #return 0  
+    if not choice:
+        return "No choice"
+    
     if choice == 'best':
         return max(kwargs, key=kwargs.get)
     elif choice == 'mean':
-        return sum(kwargs.values()) / len(kwargs)
+        total_score = sum(kwargs.values())
+        number_of_scores = len(kwargs)
+        return total_score / number_of_scores
+    else:
+        return "Error: Unknown command"
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
+print(student_scores(""))
 
 # Task 8
-def titleize(str):
-
-   # store the input string splitted in the 'words' variable 
-    words = str.split()
-
-    # if input is empty return an empty string
+def titleize(text):
+    # Add little_words to an array 
+    little_words = ["a", "on", "an", "the", "of", "and", "is", "in"] 
+    words = text.split() 
+    
+    # if input is empty return an empty string 
     if not words:
-        return ""
-
-    # Add little_words to an array
-    litle_words = ["a", "on", "an", "the", "of", "and", "is", "in"]
-
-    # process the string based on its position and contnt
+        return "" 
+        
+    # process the string based on its position and content 
     for i, word in enumerate(words):
-
-        # capitilized the 1st letter of the 1st word
-        #  and the 1st letter of the 2nd word
+        # capitalize the 1st letter of the 1st word 
+        # and the 1st letter of the last word 
         if i == 0 or i == len(words) - 1:
-            words[i] = word.capitalize()
-        # keep little_words in lowercase
-        elif word.lower() in litle_words:
-            words[i] = word.lower()
+            
+            words[i] = word.capitalize() 
+        # keep little_words in lowercase 
+        elif word.lower() in little_words:
+            words[i] = word.lower() 
         else:
-            words[i] = word.capitalize()
-
-    #return a new string         
+            words[i] = word.capitalize()# capitilize litle_words       
+    # return a new string 
     return " ".join(words)
+
 print(titleize("apple bee's"))
 print(titleize("a clash of clans"))
 print(titleize("THE WIND IN THE WILLOWS"))
