@@ -98,8 +98,8 @@ def student_scores(choice, **kwargs):
         return max(kwargs, key=kwargs.get)
     elif choice == 'mean':
         return sum(kwargs.values()) / len(kwargs)
-print(student_scores("best", Hanna=85, Zoe=95, Aria=75))
-print(student_scores("mean", Hanna=85, Zoe=95, Aria=75))
+print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
+print(student_scores("mean", math=95, history=80, science=95))
 
 # Task 8
 def titleize(str):
@@ -143,8 +143,7 @@ def hangman(secret: str, guess: str) -> str:
         else:
             result.append("_")
     return "".join(result)
-print(hangman("alphabet", ["a", "p", "h", "b", "e"]))
-print(hangman("secret", ["s", "e", "c", "r", "t"]))
+print(hangman("difficulty", "ic"))
 
 # Task 10
 def pig_latin(str):
@@ -156,11 +155,9 @@ def pig_latin(str):
         # check for "qu"
         if word.startswith("qu"):
             result.append(word[2:] + "quay")
-        
         # starts with a vowel
         elif word[0] in vowels:
-            result.append(word + "ay")
-            
+            result.append(word + "ay")      
         # starts with a consonant
         else:
             consonant = ""
@@ -175,5 +172,5 @@ def pig_latin(str):
 print(pig_latin("glove"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
 print(pig_latin("quiet")) # word start with 'qu' = ietquay
-print(pig_latin("square"))#sarequay
+print(pig_latin("square"))# square = sarequay
 print(pig_latin("yellow"))# const is add at the end then 'ay' = ellowyay
