@@ -37,7 +37,7 @@ print(calc('1', 'hi', 'multiply'))
 print(calc(2, 0, 'divide'))
 
 # Task 4
-def data_type_conversion(value, data_type='str'):# data type=float, str or int
+def data_type_conversion(value, data_type=""):# data type=float, str or int
     try:
         if data_type == 'float':
             return float(value)
@@ -130,6 +130,9 @@ def titleize(str):
     #return a new string         
     return " ".join(words)
 print(titleize("apple bee's"))
+print(titleize("a clash of clans"))
+print(titleize("THE WIND IN THE WILLOWS"))
+
 
 # Task 9
 def hangman(secret: str, guess: str) -> str: 
