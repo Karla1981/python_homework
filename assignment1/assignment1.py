@@ -91,15 +91,21 @@ def repeat(string:str, count:int):
 print(repeat("hi", 3))
 
 # Task 7-revise it
-def student_scores(choice, **kwargs):
+def student_scores(scores, **kwargs):
+    choice = ""
+    if choice is None or not scores:
+        return None
   
-    if choice == 'best':
+    if scores == 'best':
         return max(kwargs, key=kwargs.get)
-    elif choice == 'mean':
-        total_score = sum(kwargs.values())
+    
+    elif scores == 'mean':
+        total_score_sum = sum(kwargs.values())
         number_of_scores = len(kwargs)
-        return total_score / number_of_scores
-
+        return total_score_sum / number_of_scores
+    else:
+        return None
+print(student_scores(""))
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
 
@@ -147,31 +153,29 @@ def hangman(secret: str, guess: str) -> str:
     return "".join(result)
 print(hangman("difficulty", "ic"))
 
-# Task 10
-def pig_latin(word):
-    #words = str.split()
-   # result = []
-    vowels = "aeiou" 
-    
-    # 1. Words starting with vowels
-    if word[0].lower() in vowels:
-        return word + "ay" 
-    # words starting with consonants
-    else:
-        index = 0
-        while index < len(word):
-            char = word[index].lower()
-            # stop if we hit a normal vowel
-            if char in vowels:
-                break
-            # find "qu"
-            if char == 'q' and index + 1 < len(word) and word[index+1].lower() == 'u':
-                index += 2
-                break 
-            index += 1   
-        # put 'qu' to the end and add "ay"
-        return word[index:] + word[:index] + "ay"   
+def pig_latin(str):
+    words = str.split()
+    result = []
+    vowels = "aeiou"
+
+    for word in words: 
+        word.lower()
+
+        if word.startswith("qu"):
+            result = word[2:] + "qu" + "ay"
+        elif word[0] in vowels:
+            res = word + "ay"
+        else:
+            first_vowel = 0
+            for char in vowels:
+                if char in vowels:
+                    break
+                first_vowel += 1
+            res = word[first_vowel:] + word[:first_vowel] + "ay"
+    result.append(res)
+    return " ".join(result)
+
 print(pig_latin("python essentials"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
 print(pig_latin("square"))# square = sarequay
-print(pig_latin("intro to pyton"))# const is add at the end then 'ay' = ellowyay
+print(pig_latin("fox"))# const is add at the end then 'ay' = ellowyay
