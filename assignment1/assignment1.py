@@ -91,20 +91,13 @@ def repeat(string:str, count:int):
 print(repeat("hi", 3))
 
 # Task 7-revise it
-def student_scores(scores, **kwargs):
-    choice = ""
-    if choice is None or not scores:
-        return None
-  
-    if scores == 'best':
-        return max(kwargs, key=kwargs.get)
-    
-    elif scores == 'mean':
-        total_score_sum = sum(kwargs.values())
-        number_of_scores = len(kwargs)
-        return total_score_sum / number_of_scores
-    else:
-        return None
+def student_scores(choice, **scores):
+    if not scores:
+        return None 
+    if choice == "best":
+        return max(scores, key=scores.get)
+    elif choice == "mean":
+        return sum(scores.values()) / len(scores)
 print(student_scores(""))
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
@@ -159,21 +152,28 @@ def pig_latin(str):
     vowels = "aeiou"
 
     for word in words: 
-        word.lower()
+        word_lower = word.lower()
+        first_vowel = -1
 
-        if word.startswith("qu"):
-            result = word[2:] + "qu" + "ay"
-        elif word[0] in vowels:
-            res = word + "ay"
+        # find "qu"
+        for i in range(len(word_lower)):
+            if word_lower[i:i+2] == "qu":    
+                first_vowel = i + 2
+                break
+            elif word_lower[i] in vowels:
+                first_vowel = i
+                break
+        if first_vowel == 0:
+            new_word = word + "ay"
+        elif first_vowel > 0:
+            const_cluster = word[:first_vowel]
+            rest_of_word = word[first_vowel:]
+            new_word = rest_of_word + const_cluster + "ay"
         else:
-            first_vowel = 0
-            for char in vowels:
-                if char in vowels:
-                    break
-                first_vowel += 1
-            res = word[first_vowel:] + word[:first_vowel] + "ay"
-    result.append(res)
-    return " ".join(result)
+            new_word = word + "ay"
+
+        result.append(new_word)
+    return " ".join(result)          
 
 print(pig_latin("python essentials"))# word start with two consts word = oveglay
 print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
