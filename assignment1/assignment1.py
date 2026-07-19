@@ -98,6 +98,8 @@ def student_scores(choice, **scores):
         return max(scores, key=scores.get)
     elif choice == "mean":
         return sum(scores.values()) / len(scores)
+    else:
+        return None
 print(student_scores(""))
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
@@ -113,17 +115,20 @@ def titleize(text):
         return "" 
         
     # process the string based on its position and content 
-    for i, word in enumerate(words):
-        # capitalize the 1st letter of the 1st word 
-        # and the 1st letter of the last word 
+    for i, word in enumerate(words):   
+        # convert the word to lower case first
+        word_lower = word.lower()
+
+         # capitalize the 1rst letter of the first word
+         # and the 1srt letter of the last word
         if i == 0 or i == len(words) - 1:
-            
-            words[i] = word.capitalize() 
+            words[i] = word_lower.capitalize() 
+
         # keep little_words in lowercase 
-        elif word.lower() in little_words:
-            words[i] = word.lower() 
+        elif word_lower in little_words:
+            words[i] = word_lower 
         else:
-            words[i] = word.capitalize()# capitilize litle_words       
+            words[i] = word_lower.capitalize()# capitilize litle_words       
     # return a new string 
     return " ".join(words)
 
@@ -149,33 +154,36 @@ print(hangman("difficulty", "ic"))
 def pig_latin(str):
     words = str.split()
     result = []
-    vowels = "aeiou"
+    vowels = "aeiouAEIOU"
 
     for word in words: 
-        word_lower = word.lower()
-        first_vowel = -1
-
-        # find "qu"
-        for i in range(len(word_lower)):
-            if word_lower[i:i+2] == "qu":    
-                first_vowel = i + 2
-                break
-            elif word_lower[i] in vowels:
-                first_vowel = i
-                break
-        if first_vowel == 0:
+        # word start with a vowel
+        if word[0] in vowels:
             new_word = word + "ay"
-        elif first_vowel > 0:
-            const_cluster = word[:first_vowel]
-            rest_of_word = word[first_vowel:]
-            new_word = rest_of_word + const_cluster + "ay"
-        else:
-            new_word = word + "ay"
+            result.append(new_word)
+    # word has "qu" special case
+    first_vowel = -1
+    i = 0
+    while i < len(word):
+        if word[i:i+2].lower() == "qu":
+            i += 2
+            continue
+        if word[i] in vowels:
+            first_vowel = i
+            break
+        i += 1
 
-        result.append(new_word)
-    return " ".join(result)          
+    # putting the word together
+    if first_vowel > 0:
+        const_cluster = word[:first_vowel]
+        rest_of_word = word[first_vowel:]
+        new_word = rest_of_word + const_cluster + "ay"
 
-print(pig_latin("python essentials"))# word start with two consts word = oveglay
-print(pig_latin("cat"))# word start with const, the const is attached at the edn and "ay" is added at the end of it
-print(pig_latin("square"))# square = sarequay
-print(pig_latin("fox"))# const is add at the end then 'ay' = ellowyay
+    else:
+        new_word = word + "ay"
+    result.append(new_word)
+    return " ".join(result)
+print(pig_latin("quiet"))# ietquay
+print(pig_latin("cat"))# atcay
+print(pig_latin("square"))# aresquay
+print(pig_latin("fox"))# oxfay
