@@ -91,8 +91,7 @@ def repeat(string:str, count:int):
 print(repeat("hi", 3))
 # Task
 def student_scores(choice, **kwargs):
-    if not kwargs:
-        return None 
+   
     if choice == "best":
         student_with_best_scores = max(kwargs, key=kwargs.get)
         return student_with_best_scores
@@ -162,7 +161,7 @@ def pig_latin(str):
             for i in range(len(word)):
                 if word[i] in vowels:
                     # special case for "qu"
-                    if i > 0 and word[i-1:i+1] == "qu":
+                    if word[i] == "u" and i > 0 and word[i-1] == "q":
                         result.append(word[i+1:] + word[:i+1] + "ay")
                     else:
                         result.append(word[i:] + word[:i] + "ay")
@@ -175,4 +174,5 @@ def pig_latin(str):
 print(pig_latin("shy"))
 print(pig_latin("yellow"))
 print(pig_latin("square"))
+print(pig_latin("queen"))
 
