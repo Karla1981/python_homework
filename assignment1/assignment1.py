@@ -95,7 +95,7 @@ def student_scores(choice, **kwargs):
         return None 
     if choice == "best":
         student_with_best_scores = max(kwargs, key=kwargs.get)
-        return (student_with_best_scores, kwargs[student_with_best_scores])
+        return student_with_best_scores
     elif choice == "mean":
         return sum(kwargs.values()) / len(kwargs)
   
@@ -132,7 +132,7 @@ def titleize(text):
 
 print(titleize("apple bee's"))
 print(titleize("a clash of clans"))
-print(titleize("THE WIND IN THE WILLOWS"))
+print(titleize("after on"))
 
 
 # Task 9
@@ -172,7 +172,7 @@ def pig_latin(str):
                 result.append(word + "ay")        
     return " ".join(result)
 
-print(pig_latin("shy"))# ietquay
-print(pig_latin("cat"))# atcay
-print(pig_latin("square"))# aresquay
-print(pig_latin("quick"))# ickquay
+print(pig_latin("shy"))
+print(pig_latin("yellow"))
+print(pig_latin("square"))
+
