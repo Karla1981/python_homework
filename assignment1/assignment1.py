@@ -147,42 +147,33 @@ print(hangman("difficulty", "ic"))
 
 # Task 10
 def pig_latin(str_input):
-    vowels = set('aeiou')
+    vowels = set("aeiou")
     result = []
     
     for word in str_input.split():
-        # Rule 1: Starts with a vowel
+        # starts with a vowel
         if word[0] in vowels:
-            new_word = word + 'ay'
-            
+            new_word = word + "ay"    
         else:
-            # Consonant detection
-            first_vowel_idx = 0
+            # check for consonant
+            first_vowel = 0
             for i, char in enumerate(word):
-                # We reached a vowel
+                # find a vowel
                 if char in vowels:
-                    first_vowel_idx = i
-                    break
-                # Edge case for "y" being treated as a vowel (e.g. "rhythm")
-                elif i > 0 and char == 'y':
-                    first_vowel_idx = i
-                    break
+                    first_vowel = i
+                    break  
+            # check for consonant cluster
+            consonant_cluster = word[:first_vowel]
             
-            # Look at our consonant cluster
-            consonant_cluster = word[:first_vowel_idx]
-            
-            # Rule 2 & 3: Handle "qu" (e.g. "quiet", "square")
-            if word[first_vowel_idx-1:first_vowel_idx+1] == 'qu':
+            # handle "qu" as in "quiet", "square"
+            if word[first_vowel-1:first_vowel + 1] == "qu":
                 consonant_cluster += 'u'
-                first_vowel_idx += 1
-            elif word[first_vowel_idx:first_vowel_idx+2] == 'qu':
-                consonant_cluster += 'qu'
-                first_vowel_idx += 2
-                
-            new_word = word[first_vowel_idx:] + consonant_cluster + 'ay'
-            
-        result.append(new_word)
-        
+                first_vowel += 1
+            elif word[first_vowel:first_vowel + 2] == "qu":
+                consonant_cluster += "qu"
+                first_vowel += 2       
+            new_word = word[first_vowel:] + consonant_cluster + "ay"      
+        result.append(new_word)       
     return ' '.join(result)
 print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
