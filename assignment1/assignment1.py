@@ -89,15 +89,14 @@ def repeat(string:str, count:int):
         new_str += string
     return new_str
 print(repeat("hi", 3))
-# Task
+
+# Task 7
 def student_scores(choice, **kwargs):
-   
     if choice == "best":
         student_with_best_scores = max(kwargs, key=kwargs.get)
         return student_with_best_scores
     elif choice == "mean":
-        return sum(kwargs.values()) / len(kwargs)
-  
+        return sum(kwargs.values()) / len(kwargs) 
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
 
@@ -133,7 +132,6 @@ print(titleize("apple bee's"))
 print(titleize("a clash of clans"))
 print(titleize("after on"))
 
-
 # Task 9
 def hangman(secret: str, guess: str) -> str: 
     # variable that will hold the new string
@@ -147,32 +145,40 @@ def hangman(secret: str, guess: str) -> str:
     return "".join(result)
 print(hangman("difficulty", "ic"))
 
+# Task 10
 def pig_latin(str):
-    vowels = set("aeiou")
-    words = str.lower().split()
+    vowels = set('aeiou')
     result = []
     
-    for word in words:
-        # starts with a vowel
+    for word in str.split():
         if word[0] in vowels:
-            result.append(word + "ay")
+            # starts with a vowel
+            new_word = word + 'ay'
+        elif word.startswith('qu'):
+            # starts with "qu"
+            new_word = word[2:] + 'ay'
         else:
-            # check for "qu" or multiple consonants before a vowel
-            for i in range(len(word)):
-                if word[i] in vowels:
-                    # special case for "qu"
-                    if word[i] == "u" and i > 0 and word[i-1] == "q":
-                        result.append(word[i+1:] + word[:i+1] + "ay")
-                    else:
-                        result.append(word[i:] + word[:i] + "ay")
+            # starts with consonants and checks for embedded 'qu' clusters
+            consonant_cluster = ''
+            for char in word:
+                if char not in vowels:
+                    consonant_cluster += char
+                else:
                     break
+            
+            # handle "qu" if it appears directly after the initial consonant cluster
+            remainder = word[len(consonant_cluster):]
+            if remainder.startswith('qu'):
+                consonant_cluster += 'qu'
+                new_word = word[len(consonant_cluster):] + consonant_cluster + 'ay'
             else:
-                # word has no vowels
-                result.append(word + "ay")        
-    return " ".join(result)
+                new_word = remainder + consonant_cluster + 'ay'
+                
+        result.append(new_word)
+        
+    return ' '.join(result)
 
-print(pig_latin("shy"))
+print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
 print(pig_latin("square"))
-print(pig_latin("queen"))
-
+print(pig_latin("quiet"))
