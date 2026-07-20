@@ -146,11 +146,11 @@ def hangman(secret: str, guess: str) -> str:
 print(hangman("difficulty", "ic"))
 
 # Task 10
-def pig_latin(str):
+def pig_latin(str_input):
     vowels = set('aeiou')
     result = []
     
-    for word in str.split():
+    for word in str_input.split():
         if word[0] in vowels:
             # starts with a vowel
             new_word = word + 'ay'
@@ -172,12 +172,9 @@ def pig_latin(str):
                 consonant_cluster += 'qu'
                 new_word = word[len(consonant_cluster):] + consonant_cluster + 'ay'
             else:
-                new_word = remainder + consonant_cluster + 'ay'
-                
+                new_word = remainder + consonant_cluster + 'ay'         
         result.append(new_word)
-        
     return ' '.join(result)
-
 print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
 print(pig_latin("square"))
