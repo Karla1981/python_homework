@@ -151,29 +151,38 @@ def pig_latin(str_input):
     result = []
     
     for word in str_input.split():
+        # Rule 1: Starts with a vowel
         if word[0] in vowels:
-            # starts with a vowel
             new_word = word + 'ay'
-        elif word.startswith('qu'):
-            # starts with "qu"
-            new_word = word[2:] + 'ay'
+            
         else:
-            # starts with consonants and checks for embedded 'qu' clusters
-            consonant_cluster = ''
-            for char in word:
-                if char not in vowels:
-                    consonant_cluster += char
-                else:
+            # Consonant detection
+            first_vowel_idx = 0
+            for i, char in enumerate(word):
+                # We reached a vowel
+                if char in vowels:
+                    first_vowel_idx = i
+                    break
+                # Edge case for "y" being treated as a vowel (e.g. "rhythm")
+                elif i > 0 and char == 'y':
+                    first_vowel_idx = i
                     break
             
-            # handle "qu" if it appears directly after the initial consonant cluster
-            remainder = word[len(consonant_cluster):]
-            if remainder.startswith('qu'):
+            # Look at our consonant cluster
+            consonant_cluster = word[:first_vowel_idx]
+            
+            # Rule 2 & 3: Handle "qu" (e.g. "quiet", "square")
+            if word[first_vowel_idx-1:first_vowel_idx+1] == 'qu':
+                consonant_cluster += 'u'
+                first_vowel_idx += 1
+            elif word[first_vowel_idx:first_vowel_idx+2] == 'qu':
                 consonant_cluster += 'qu'
-                new_word = word[len(consonant_cluster):] + consonant_cluster + 'ay'
-            else:
-                new_word = remainder + consonant_cluster + 'ay'         
+                first_vowel_idx += 2
+                
+            new_word = word[first_vowel_idx:] + consonant_cluster + 'ay'
+            
         result.append(new_word)
+        
     return ' '.join(result)
 print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
