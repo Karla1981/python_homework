@@ -102,32 +102,23 @@ print(student_scores("mean", math=95, history=80, science=95))
 
 # Task 8
 def titleize(text):
-    # Add little_words to an array 
     little_words = ["a", "on", "an", "the", "of", "and", "is", "in"] 
     words = text.split() 
     
-    # if input is empty return an empty string 
     if not words:
-        return "" 
-        
+        return ""    
     # process the string based on its position and content 
     for i, word in enumerate(words):   
         # convert the word to lower case first
         word_lower = word.lower()
-
-         # capitalize the 1rst letter of the first word
-         # and the 1srt letter of the last word
         if i == 0 or i == len(words) - 1:
-            words[i] = word_lower.capitalize() 
-
-        # keep little_words in lowercase 
+            words[i] = word_lower.capitalize() # capitilize
         elif word_lower in little_words:
             words[i] = word_lower 
         else:
             words[i] = word_lower.capitalize()# capitilize litle_words       
     # return a new string 
     return " ".join(words)
-
 print(titleize("apple bee's"))
 print(titleize("a clash of clans"))
 print(titleize("after on"))
@@ -158,14 +149,13 @@ def pig_latin(str_input):
             # check for consonant
             first_vowel = 0
             for i, char in enumerate(word):
-                # find a vowel
                 if char in vowels:
                     first_vowel = i
                     break  
             # check for consonant cluster
             consonant_cluster = word[:first_vowel]
             
-            # handle "qu" as in "quiet", "square"
+            # handle "qu"
             if word[first_vowel-1:first_vowel + 1] == "qu":
                 consonant_cluster += 'u'
                 first_vowel += 1
@@ -174,7 +164,7 @@ def pig_latin(str_input):
                 first_vowel += 2       
             new_word = word[first_vowel:] + consonant_cluster + "ay"      
         result.append(new_word)       
-    return ' '.join(result)
+    return " ".join(result)
 print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
 print(pig_latin("square"))
