@@ -98,7 +98,7 @@ def student_scores(choice, **kwargs):
     elif choice == "mean":
         return sum(kwargs.values()) / len(kwargs)
     else:
-        raise ValueError("Invalid option, please choose 'best' or 'mean'" )
+        return None
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
 
