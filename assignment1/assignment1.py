@@ -96,7 +96,9 @@ def student_scores(choice, **kwargs):
         student_with_best_scores = max(kwargs, key=kwargs.get)
         return student_with_best_scores
     elif choice == "mean":
-        return sum(kwargs.values()) / len(kwargs) 
+        return sum(kwargs.values()) / len(kwargs)
+    else:
+        raise ValueError("Invalid option, please choose 'best' or 'mean'" )
 print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
 print(student_scores("mean", math=95, history=80, science=95))
 
@@ -140,30 +142,31 @@ print(hangman("difficulty", "ic"))
 def pig_latin(str_input):
     vowels = set("aeiou")
     result = []
-    
+  
     for word in str_input.split():
-        # starts with a vowel
-        if word[0] in vowels:
-            new_word = word + "ay"    
-        else:
-            # check for consonant
-            first_vowel = 0
-            for i, char in enumerate(word):
-                if char in vowels:
-                    first_vowel = i
-                    break  
-            # check for consonant cluster
-            consonant_cluster = word[:first_vowel]
-            
-            # handle "qu"
-            if word[first_vowel-1:first_vowel + 1] == "qu":
-                consonant_cluster += 'u'
-                first_vowel += 1
-            elif word[first_vowel:first_vowel + 2] == "qu":
-                consonant_cluster += "qu"
-                first_vowel += 2       
-            new_word = word[first_vowel:] + consonant_cluster + "ay"      
-        result.append(new_word)       
+       # starts with a vowel
+       if word[0] in vowels:
+           new_word = word + "ay"   
+       else:
+           # check for consonant - if first letter is a cons. save it to first_vowel
+           first_vowel = 0
+           for i, char in enumerate(word):
+               if char in vowels:
+                   first_vowel = i
+                   break 
+           # does str starts with a consonant cluster
+           consonant_cluster = word[:first_vowel]
+
+           # handle "qu"
+           if word[first_vowel-1:first_vowel + 1] == "qu":
+               consonant_cluster += 'u'
+               first_vowel += 1
+           elif word[first_vowel:first_vowel + 2] == "qu":
+               consonant_cluster += "qu"
+               first_vowel += 2      
+           new_word = word[first_vowel:] + consonant_cluster + "ay"   
+           #print("here: ",consonant_cluster)  
+       result.append(new_word)      
     return " ".join(result)
 print(pig_latin("the quick brown fox"))
 print(pig_latin("yellow"))
