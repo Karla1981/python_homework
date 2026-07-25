@@ -1,12 +1,12 @@
-# Write your code here.
+# Task 1
 def hello():
     return 'Hello!'
-print(hello())
+#print(hello())
 
 # Task 2
 def greet(name):
     return f"Hello, {name}!"
-print(greet('Zoe'))
+#print(greet('Zoe'))
 
 # Task 3
 def calc(val1, val2, defaultValue='multiply'):
@@ -31,10 +31,10 @@ def calc(val1, val2, defaultValue='multiply'):
         return "You can't divide by 0!"
     except TypeError:
         return "You can't multiply those values!" 
-print(calc(2, 3, 'multiply'))
-print(calc(9, 3, 'divide'))
-print(calc('1', 'hi', 'multiply'))
-print(calc(2, 0, 'divide'))
+#print(calc(2, 3, 'multiply'))
+#print(calc(9, 3, 'divide'))
+#print(calc('1', 'hi', 'multiply'))
+#print(calc(2, 0, 'divide'))
 
 # Task 4
 def data_type_conversion(value, data_type):# data type=float, str or int
@@ -51,11 +51,11 @@ def data_type_conversion(value, data_type):# data type=float, str or int
         return f"You can't convert {value} into a {data_type}."
     except TypeError:
         return f"You can't convert {value} into a {data_type}."
-print(data_type_conversion("5", "float"))#float
-print(data_type_conversion(91.1, "str"))#string
-print(data_type_conversion("110", "int"))#integer
-print(data_type_conversion("nonsense", "float"))#type error
-print(data_type_conversion("abc", "int"))# type error
+#print(data_type_conversion("5", "float"))#float
+#print(data_type_conversion(91.1, "str"))#string
+#print(data_type_conversion("110", "int"))#integer
+#print(data_type_conversion("nonsense", "float"))#type error
+##print(data_type_conversion("abc", "int"))# type error
 
 # Task 5
 def grade(*args):
@@ -75,11 +75,11 @@ def grade(*args):
             return "F"
     except TypeError:
         return "Invalid data was provided."
-print(grade(85))
-print(grade(65))
-print(grade(75))
-print(grade(95))
-print(grade('hello'))
+#print(grade(85))
+#print(grade(65))
+#print(grade(75))
+#print(grade(95))
+#print(grade('hello'))
 
 # Task 6
 def repeat(string:str, count:int):
@@ -88,7 +88,7 @@ def repeat(string:str, count:int):
     for _ in range(count):
         new_str += string
     return new_str
-print(repeat("hi", 3))
+#print(repeat("hi", 3))
 
 # Task 7
 def student_scores(choice, **kwargs):
@@ -99,8 +99,8 @@ def student_scores(choice, **kwargs):
         return sum(kwargs.values()) / len(kwargs)
     else:
         return None
-print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
-print(student_scores("mean", math=95, history=80, science=95))
+#print(student_scores("best", Hanna=85, Zoe=95, Aria=75, tim=75))
+#print(student_scores("mean", math=95, history=80, science=95))
 
 # Task 8
 def titleize(text):
@@ -121,9 +121,9 @@ def titleize(text):
             words[i] = word_lower.capitalize()# capitilize litle_words       
     # return a new string 
     return " ".join(words)
-print(titleize("apple bee's"))
-print(titleize("a clash of clans"))
-print(titleize("after on"))
+#print(titleize("apple bee's"))
+#print(titleize("a clash of clans"))
+#print(titleize("after on"))
 
 # Task 9
 def hangman(secret: str, guess: str) -> str: 
@@ -136,39 +136,33 @@ def hangman(secret: str, guess: str) -> str:
         else:
             result.append("_")
     return "".join(result)
-print(hangman("difficulty", "ic"))
+#print(hangman("difficulty", "ic"))
 
 # Task 10
-def pig_latin(str_input):
+def pig_latin(text):
+    # var vowels 
     vowels = set("aeiou")
+    words = text.split()
     result = []
-  
-    for word in str_input.split():
-       # starts with a vowel
-       if word[0] in vowels:
-           new_word = word + "ay"   
-       else:
-           # check for consonant - if first letter is a cons. save it to first_vowel
-           first_vowel = 0
-           for i, char in enumerate(word):
-               if char in vowels:
-                   first_vowel = i
-                   break 
-           # does str starts with a consonant cluster
-           consonant_cluster = word[:first_vowel]
 
-           # handle "qu"
-           if word[first_vowel-1:first_vowel + 1] == "qu":
-               consonant_cluster += 'u'
-               first_vowel += 1
-           elif word[first_vowel:first_vowel + 2] == "qu":
-               consonant_cluster += "qu"
-               first_vowel += 2      
-           new_word = word[first_vowel:] + consonant_cluster + "ay"   
-           #print("here: ",consonant_cluster)  
-       result.append(new_word)      
+    for word in words:
+        if word[0] in vowels:
+            result.append(word + "ay")
+        else:
+            # if my word starts with 'qu' remove them and add then to the end followed by 'ay'
+            if word.startswith("qu"):
+                result.append(word[2:] + "ay")
+            else:
+                i = 0
+                while i < len(word) and word[i] not in vowels:
+                    if i + 1 < len(word) and word[i:i+2] == "qu":
+                        i += 2
+                        break
+                    i += 1
+                result.append(word[i:] + word[:i] + "ay")
     return " ".join(result)
-print(pig_latin("the quick brown fox"))
-print(pig_latin("yellow"))
 print(pig_latin("square"))
-print(pig_latin("quiet"))
+print(pig_latin("quick"))
+print(pig_latin("the quick brown fox"))
+
+
